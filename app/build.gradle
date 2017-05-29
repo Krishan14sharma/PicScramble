@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.pic.scramble"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
+
+    // Design support lib
+    compile 'com.android.support:design:' + rootProject.ext.supportLibVersion
+
+    compile 'com.android.support:recyclerview-v7:' + rootProject.ext.supportLibVersion
+
+    // Retrofit
+    compile 'com.squareup.retrofit2:retrofit:' + rootProject.ext.retrofitVersion
+    compile 'com.squareup.retrofit2:converter-gson:' + rootProject.ext.retrofitVersion
+
+    //RxAndroid
+    compile 'io.reactivex:rxandroid:' + rootProject.ext.rxandroidVersion
+    compile 'io.reactivex:rxjava:' + rootProject.ext.rxjavaVersion
+    compile 'com.squareup.retrofit2:adapter-rxjava:' + rootProject.ext.retroRxAdapterVersion
+
+    // ButterKnife
+    compile 'com.jakewharton:butterknife:' + rootProject.ext.butterKnifeVersion
+    apt 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterKnifeVersion
+
+    //Dagger
+    apt 'com.google.dagger:dagger-compiler:' + rootProject.ext.daggerVersion
+    compile 'com.google.dagger:dagger:' + rootProject.ext.daggerVersion
+    provided 'javax.annotation:jsr250-api:' + rootProject.ext.javaxVersion
+
+    // Picasso
+    compile 'com.squareup.picasso:picasso:' + rootProject.ext.picassoVersion
+
+
+    // Annotations
+    compile 'com.android.support:support-annotations:25.3.1'
+
+    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+
+    testCompile 'junit:junit:4.12'
+}
